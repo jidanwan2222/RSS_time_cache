@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{context.rss_title}} RSS summary</title>
+</head>
+<body>
+	<h1>{{context.rss_title}}</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>title</th>
+				<th>link</th>
+				<th>show content</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{% for value1, value2, value3, value4 in context.rawData %}
+			<tr>
+				<td>{{value1}}</td>
+				<td><p><a href="{{value2}}">{{value2}}</a></p></td>
+				<td>
+					{% if (value4 == 'img') or (value4 == 'jpg') %}
+						<img src={{value3}} width="200" height="200"/>
+					{% elif value4 == 'mp4' %}
+						<video width="300" height="300" controls="controls">
+	  					<source src={{value3}} type="video/mp4" />
+	  				{% else %}
+	  					no content shown
+	  				{% endif %}
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</body>
+</html>
